@@ -1,5 +1,7 @@
 package com.example.funny.testwork;
 
+/* Класс модели для создания списка записей */
+
 public class Model {
     private String login;
     private String url_avatar;

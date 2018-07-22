@@ -7,9 +7,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+/* класс создан для поиска репозитория */
+
 public class Repositories extends Fragment {
 
-    public static Repositories searchRepos()
+    public static Repositories searchRepos() // метод для создания экземпляра класса
     {
         Repositories repositories = new Repositories();
 

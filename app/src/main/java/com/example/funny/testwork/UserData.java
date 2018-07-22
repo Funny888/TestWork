@@ -1,5 +1,7 @@
 package com.example.funny.testwork;
 
+/* Класс модели для получение данных json-объектов*/
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -16,21 +18,66 @@ class UserData {
     @Expose
     private String login;
 
-    @SerializedName("login")
+    @SerializedName("name")
     @Expose
     private String Name;
 
-    @SerializedName("login")
+    @SerializedName("company")
     @Expose
     private String Company;
 
-    @SerializedName("login")
+    @SerializedName("html_url")
     @Expose
     private String Aboutmyself;
 
-    @SerializedName("login")
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String name) {
+        Name = name;
+    }
+
+    public String getCompany() {
+        return Company;
+    }
+
+    public void setCompany(String company) {
+        Company = company;
+    }
+
+    public String getAboutmyself() {
+        return Aboutmyself;
+    }
+
+    public void setAboutmyself(String aboutmyself) {
+        Aboutmyself = aboutmyself;
+    }
+
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String email) {
+        Email = email;
+    }
+
+    @SerializedName("email")
     @Expose
     private String Email;
+
+
+    @SerializedName("url")
+    @Expose
+    private String url;
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
 
     public String getId() {
         return id;

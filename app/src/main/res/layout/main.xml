@@ -13,15 +13,6 @@
 
     </FrameLayout>
 
-
-    <Button
-        android:id="@+id/load_more"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="58dp"
-        android:text="Еще" />
     <include
         layout="@layout/bottom_navigation"
         android:layout_gravity="bottom"

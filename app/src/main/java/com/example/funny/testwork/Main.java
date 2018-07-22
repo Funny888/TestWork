@@ -22,7 +22,6 @@ import retrofit2.http.GET;
 
 public class Main extends AppCompatActivity {
 BottomNavigationView navigationBottom;
-ListView listView;
 
 
     @Override

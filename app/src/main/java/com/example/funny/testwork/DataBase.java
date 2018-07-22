@@ -5,6 +5,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 
+/* Класс для создания базы данных в которой должны быть записаны данных об объектах если телефон не был бы подключен к интернету  */
 
 public class DataBase extends SQLiteOpenHelper {
 
