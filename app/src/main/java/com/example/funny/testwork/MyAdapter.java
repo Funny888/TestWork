@@ -1,6 +1,8 @@
 package com.example.funny.testwork;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -76,12 +78,13 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyHolder> {
             public void onClick(View v) {
                 info.getInfoData(model.getLogin()).observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.newThread()).subscribe(userData2 -> {
 
-
-
-
-                   Toast.makeText(holder.itemView.getContext(),"Имя: " + userData2.getName() + "\n"
-                           +  "Компания: " + userData2.getCompany() + "\n" +
-                           "Почта: " + userData2.getEmail() + "\n",Toast.LENGTH_SHORT).show();
+                    AlertDialog dialog = new AlertDialog.Builder(v.getContext())
+                            .setTitle("Информация")
+                            .setMessage("Имя: " + userData2.getName() + "\n"
+                                    +  "Компания: " + userData2.getCompany() + "\n" +
+                                    "Почта: " + userData2.getEmail() + "\n")
+                            .create();
+                    dialog.show();
                    // нет записи "о себе так как я просто не нашел подобную строку"
 
                 });

@@ -2,6 +2,10 @@ package com.example.funny.testwork;
 
 
 import android.app.Fragment;
+import android.content.ContentValues;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -37,6 +41,8 @@ public class getUserData extends Fragment {
     MyAdapter adapter;
     RecyclerView recyclerView;
     ArrayList<Model> list;
+    DataBase db;
+    SQLiteDatabase connectDB;
 
     public static final Integer _LIMIT = 10; // Сонстанта для первоначального отображения списка
 
@@ -59,6 +65,9 @@ public class getUserData extends Fragment {
         recyclerView = view.findViewById(R.id.list);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getContext()); //создаем менеджер-лэйаут и указываем в качесте данных текущий контекст
         recyclerView.setLayoutManager(layoutManager); //устанавливаем менеджер-лэйаут в ресайкл вью
+        db = new DataBase(getContext());
+        connectDB = db.getWritableDatabase();
+
 
         array(_LIMIT);
 
@@ -106,11 +115,23 @@ public class getUserData extends Fragment {
         String[] loginsArray = new String[arr.size()], avatarsArray = new String[arr.size()];
 
 
+        ContentValues cv = new ContentValues();
+
         for (int i = 0; i < arr.size(); i++) { // цикл для получения значение полей из объектов
+
             loginsArray[i] = arr.get(i).getLogin();
             avatarsArray[i] = arr.get(i).getAvatar_url();
-
+            if (roExist(loginsArray[i]) == false) {
+                cv.put(DataBase._ColumnLogin, loginsArray[i]);
+                cv.put(DataBase._ColumnAvatar, avatarsArray[i]);
+                connectDB.insert(DataBase._USER_TABLE, null, cv);
+            }
+            else
+            {
+                Log.i(TAG, "Запись существует");
+            }
         }
+
 
         adapter = new MyAdapter(getDataAdapter(loginsArray,avatarsArray));
         recyclerView.setAdapter(adapter);
@@ -144,7 +165,20 @@ public class getUserData extends Fragment {
         return list;
     }
 
+    private Boolean roExist(String row)
+    {
+        Cursor cursor = connectDB.query(DataBase._USER_TABLE,null,null,null,null,null,null);
 
+        if (cursor.moveToFirst()) {
+            int login = cursor.getColumnIndex(DataBase._ColumnLogin);
+            while (cursor.moveToNext()) {
+
+               if (cursor.getString(login).equals(row))
+                    return true;
+            }
+        }
+        return false;
+    }
 
 }
 

@@ -9,15 +9,17 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DataBase extends SQLiteOpenHelper {
 
-    public static final String DB = "DataUsers";
+    public static final String _NAMEDB = "DataUsers", _USER_TABLE = "Users" , _ID = "_id" ,_ColumnLogin = "Login",
+            _ColumnAvatar = "url_avatar", _ColumnName = "Name", _ColumnCompany = "Company", _ColumnEmail = "Email";
 
-    public DataBase(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
+    public DataBase(Context context) {
+        super(context, _NAMEDB, null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("");
+        db.execSQL("CREATE TABLE " + _USER_TABLE + "(" + _ID +" integer PRIMARY KEY AUTOINCREMENT," + _ColumnLogin + " varchar NOT NULL UNIQUE,"
+                + _ColumnAvatar +" text,"+ _ColumnName +" text,"+ _ColumnCompany +" text,"+ _ColumnEmail +" text);");
     }
 
     @Override
